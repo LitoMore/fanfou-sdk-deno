@@ -18,7 +18,7 @@ export default class Fanfou {
       password = "",
       apiDomain = "api.fanfou.com",
       oauthDomain = "fanfou.com",
-      protocol = "",
+      protocol = "http:",
       hooks = {}
     } = opt;
 
