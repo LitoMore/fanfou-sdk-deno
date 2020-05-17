@@ -66,6 +66,7 @@ ff.getAccessToken(token);
 ff.xauth();
 ff.get(uri, params);
 ff.post(uri, params);
+ff.upload(uri, params)
 ```
 
 **Examples**
@@ -85,7 +86,7 @@ ff.post(uri, params);
   const status = await ff.post('/statuses/update', {status: 'post test'});
 
   // Upload photo
-  const result = await ff.post('/photos/upload', {photo: fs.createReadStream(path), status: 'unicorn'});
+  const result = await ff.upload('/photos/upload', {photo: uploadFile, status: 'unicorn'});
 })();
 ```
 
