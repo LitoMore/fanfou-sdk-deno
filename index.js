@@ -1,6 +1,6 @@
 import ky from "https://unpkg.com/ky/index.js";
 import oauth from "https://raw.githubusercontent.com/LitoMore/oauth-1.0a/deno/oauth-1.0a.js";
-import { parse, stringify } from "https://denolib.com/denolib/qs/mod.ts";
+import { parse, stringify } from "https://deno.land/std/node/querystring.ts";
 
 import hmacsha1 from "./hmacsha1.js";
 import User from "./user.js";
@@ -146,7 +146,7 @@ export default class Fanfou {
     return { oauthToken, oauthTokenSecret };
   }
 
-  async get(uri, params) {
+  async get(uri, params = {}) {
     const query = stringify(params);
     const url = `${this.apiEndPoint}${uri}.json${query ? `?${query}` : ""}`;
     const token = { key: this.oauthToken, secret: this.oauthTokenSecret };
@@ -175,7 +175,7 @@ export default class Fanfou {
     return result;
   }
 
-  async post(uri, params) {
+  async post(uri, params = {}) {
     const url = `${this.apiEndPoint}${uri}.json`;
     const token = { key: this.oauthToken, secret: this.oauthTokenSecret };
     const { Authorization } = this.o.toHeader(
@@ -204,7 +204,7 @@ export default class Fanfou {
     return result;
   }
 
-  async upload(uri, params) {
+  async upload(uri, params = {}) {
     const url = `${this.apiEndPoint}${uri}.json`;
     const token = { key: this.oauthToken, secret: this.oauthTokenSecret };
     const { Authorization } = this.o.toHeader(
