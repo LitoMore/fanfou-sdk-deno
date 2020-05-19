@@ -1,3 +1,4 @@
+// deno-fmt-ignore-file
 /*! https://mths.be/he v1.2.0 by @mathias | MIT license */
 // Detect free variables `exports`.
 

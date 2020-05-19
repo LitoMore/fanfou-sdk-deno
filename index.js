@@ -19,7 +19,7 @@ export default class Fanfou {
       apiDomain = "api.fanfou.com",
       oauthDomain = "fanfou.com",
       protocol = "http:",
-      hooks = {}
+      hooks = {},
     } = opt;
 
     this.consumerKey = consumerKey;
@@ -49,7 +49,7 @@ export default class Fanfou {
         }
 
         return hmacsha1(key, baseString);
-      }
+      },
     });
   }
 
@@ -61,22 +61,22 @@ export default class Fanfou {
   async getRequestToken() {
     const url = `${this.oauthEndPoint}/oauth/request_token`;
     const { Authorization } = this.o.toHeader(
-      this.o.authorize({ url, method: "GET" })
+      this.o.authorize({ url, method: "GET" }),
     );
     const response = await ky.get(url, {
       hooks: {
         beforeRequest: [
-          request => {
+          (request) => {
             request.headers.set("Authorization", Authorization);
-          }
-        ]
-      }
+          },
+        ],
+      },
     });
     const body = await response.text();
     const result = parse(body);
     const {
       oauth_token: oauthToken,
-      oauth_token_secret: oauthTokenSecret
+      oauth_token_secret: oauthTokenSecret,
     } = result;
     this.oauthToken = oauthToken;
     this.oauthTokenSecret = oauthTokenSecret;
@@ -88,23 +88,23 @@ export default class Fanfou {
     const { Authorization } = this.o.toHeader(
       this.o.authorize(
         { url, method: "GET" },
-        { key: token.oauthToken, secret: token.oauthTokenSecret }
-      )
+        { key: token.oauthToken, secret: token.oauthTokenSecret },
+      ),
     );
     const response = await ky.get(url, {
       hooks: {
         beforeRequest: [
-          request => {
+          (request) => {
             request.headers.set("Authorization", Authorization);
-          }
-        ]
-      }
+          },
+        ],
+      },
     });
     const body = await response.text();
     const result = parse(body);
     const {
       oauth_token: oauthToken,
-      oauth_token_secret: oauthTokenSecret
+      oauth_token_secret: oauthTokenSecret,
     } = result;
     this.oauthToken = oauthToken;
     this.oauthTokenSecret = oauthTokenSecret;
@@ -116,30 +116,30 @@ export default class Fanfou {
     const params = {
       x_auth_mode: "client_auth",
       x_auth_password: this.password,
-      x_auth_username: this.username
+      x_auth_username: this.username,
     };
     const { Authorization } = this.o.toHeader(
-      this.o.authorize({ url, method: "POST" })
+      this.o.authorize({ url, method: "POST" }),
     );
     const response = await ky.post(url, {
       hooks: {
         beforeRequest: [
-          request => {
+          (request) => {
             request.headers.set("Authorization", Authorization);
             request.headers.set(
               "Content-Type",
-              "application/x-www-form-urlencoded"
+              "application/x-www-form-urlencoded",
             );
-          }
-        ]
+          },
+        ],
       },
-      body: stringify(params)
+      body: stringify(params),
     });
     const body = await response.text();
     const result = parse(body);
     const {
       oauth_token: oauthToken,
-      oauth_token_secret: oauthTokenSecret
+      oauth_token_secret: oauthTokenSecret,
     } = result;
     this.oauthToken = oauthToken;
     this.oauthTokenSecret = oauthTokenSecret;
@@ -151,20 +151,20 @@ export default class Fanfou {
     const url = `${this.apiEndPoint}${uri}.json${query ? `?${query}` : ""}`;
     const token = { key: this.oauthToken, secret: this.oauthTokenSecret };
     const { Authorization } = this.o.toHeader(
-      this.o.authorize({ url, method: "GET" }, token)
+      this.o.authorize({ url, method: "GET" }, token),
     );
     const response = await ky.get(url, {
       hooks: {
         beforeRequest: [
-          request => {
+          (request) => {
             request.headers.set("Authorization", Authorization);
             request.headers.set(
               "Content-Type",
-              "application/x-www-form-urlencoded"
+              "application/x-www-form-urlencoded",
             );
-          }
-        ]
-      }
+          },
+        ],
+      },
     });
     const body = await response.json();
     if (body.error) {
@@ -179,21 +179,21 @@ export default class Fanfou {
     const url = `${this.apiEndPoint}${uri}.json`;
     const token = { key: this.oauthToken, secret: this.oauthTokenSecret };
     const { Authorization } = this.o.toHeader(
-      this.o.authorize({ url, method: "POST", data: params }, token)
+      this.o.authorize({ url, method: "POST", data: params }, token),
     );
     const response = await ky.post(url, {
       hooks: {
         beforeRequest: [
-          request => {
+          (request) => {
             request.headers.set("Authorization", Authorization);
             request.headers.set(
               "Content-Type",
-              "application/x-www-form-urlencoded"
+              "application/x-www-form-urlencoded",
             );
-          }
-        ]
+          },
+        ],
       },
-      body: stringify(params)
+      body: stringify(params),
     });
     const body = await response.json();
     if (body.error) {
@@ -208,21 +208,21 @@ export default class Fanfou {
     const url = `${this.apiEndPoint}${uri}.json`;
     const token = { key: this.oauthToken, secret: this.oauthTokenSecret };
     const { Authorization } = this.o.toHeader(
-      this.o.authorize({ url, method: "POST" }, token)
+      this.o.authorize({ url, method: "POST" }, token),
     );
     const formData = new FormData();
-    Object.keys(params).forEach(key => {
+    Object.keys(params).forEach((key) => {
       formData.append(key, params[key]);
     });
     const response = await ky.post(url, {
       hooks: {
         beforeRequest: [
-          request => {
+          (request) => {
             request.headers.set("Authorization", Authorization);
-          }
-        ]
+          },
+        ],
       },
-      body: formData
+      body: formData,
     });
     const body = await response.json();
     if (body.error) {
@@ -277,7 +277,7 @@ export default class Fanfou {
 
       // Direct Message
       "/direct_messages/new": "dm",
-      "/direct_messages/destroy": "dm"
+      "/direct_messages/destroy": "dm",
     };
 
     const type = uriList[uri] || null;
