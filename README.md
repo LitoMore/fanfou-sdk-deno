@@ -5,7 +5,7 @@ Fanfou SDK for Deno
 ## Install
 
 ```javascript
-import Fanfou from 'https://raw.githubusercontent.com/LitoMore/fanfou-sdk-deno/master/index.js'
+import Fanfou from 'https://deno.land/x/fanfou_sdk/index.js'
 ```
 
 ## Usage
