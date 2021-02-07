@@ -13,34 +13,30 @@ import Fanfou from "https://deno.land/x/fanfou_sdk/index.js";
 **OAuth**
 
 ```javascript
-(async () => {
-  const ff = new Fanfou({
-    consumerKey: "",
-    consumerSecret: "",
-    oauthToken: "",
-    oauthTokenSecret: "",
-  });
+const ff = new Fanfou({
+  consumerKey: "",
+  consumerSecret: "",
+  oauthToken: "",
+  oauthTokenSecret: "",
+});
 
-  const timeline = await ff.get("/statuses/home_timeline", { format: "html" });
-})();
+const timeline = await ff.get("/statuses/home_timeline", { format: "html" });
 ```
 
 **XAuth**
 
 ```javascript
-(async () => {
-  const ff = new Fanfou({
-    consumerKey: "",
-    consumerSecret: "",
-    username: "",
-    password: "",
-  });
+const ff = new Fanfou({
+  consumerKey: "",
+  consumerSecret: "",
+  username: "",
+  password: "",
+});
 
-  await ff.xauth();
+await ff.xauth();
 
-  const timeline = await ff.get("/statuses/public_timeline", { count: 10 });
-  const status = await ff.post("/statuses/update", { status: "Hi Fanfou" });
-})();
+const timeline = await ff.get("/statuses/public_timeline", { count: 10 });
+const status = await ff.post("/statuses/update", { status: "Hi Fanfou" });
 ```
 
 **Options**
@@ -73,25 +69,23 @@ ff.upload(uri, params);
 **Examples**
 
 ```javascript
-(async () => {
-  // Get request token
-  const token = await ff.getRequestToken();
+// Get request token
+const token = await ff.getRequestToken();
 
-  // Get access token
-  const token = await ff.getAccessToken(token);
+// Get access token
+const token = await ff.getAccessToken(token);
 
-  // Get timeline
-  const timeline = await ff.get("/statuses/home_timeline", {});
+// Get timeline
+const timeline = await ff.get("/statuses/home_timeline", {});
 
-  // Post status
-  const status = await ff.post("/statuses/update", { status: "post test" });
+// Post status
+const status = await ff.post("/statuses/update", { status: "post test" });
 
-  // Upload photo
-  const result = await ff.upload("/photos/upload", {
-    photo: uploadFile,
-    status: "unicorn",
-  });
-})();
+// Upload photo
+const result = await ff.upload("/photos/upload", {
+  photo: uploadFile,
+  status: "unicorn",
+});
 ```
 
 **Tips**
