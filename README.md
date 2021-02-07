@@ -5,7 +5,7 @@ Fanfou SDK for Deno
 ## Install
 
 ```javascript
-import Fanfou from 'https://deno.land/x/fanfou_sdk/index.js'
+import Fanfou from "https://deno.land/x/fanfou_sdk/index.js";
 ```
 
 ## Usage
@@ -15,13 +15,13 @@ import Fanfou from 'https://deno.land/x/fanfou_sdk/index.js'
 ```javascript
 (async () => {
   const ff = new Fanfou({
-    consumerKey: '',
-    consumerSecret: '',
-    oauthToken: '',
-    oauthTokenSecret: ''
+    consumerKey: "",
+    consumerSecret: "",
+    oauthToken: "",
+    oauthTokenSecret: "",
   });
 
-  const timeline = await ff.get('/statuses/home_timeline', {format: 'html'});
+  const timeline = await ff.get("/statuses/home_timeline", { format: "html" });
 })();
 ```
 
@@ -30,16 +30,16 @@ import Fanfou from 'https://deno.land/x/fanfou_sdk/index.js'
 ```javascript
 (async () => {
   const ff = new Fanfou({
-    consumerKey: '',
-    consumerSecret: '',
-    username: '',
-    password: ''
+    consumerKey: "",
+    consumerSecret: "",
+    username: "",
+    password: "",
   });
 
   await ff.xauth();
 
-  const timeline = await ff.get('/statuses/public_timeline', {count: 10});
-  const status = await ff.post('/statuses/update', {status: 'Hi Fanfou'});
+  const timeline = await ff.get("/statuses/public_timeline", { count: 10 });
+  const status = await ff.post("/statuses/update", { status: "Hi Fanfou" });
 })();
 ```
 
@@ -56,7 +56,8 @@ import Fanfou from 'https://deno.land/x/fanfou_sdk/index.js'
 - `oauthDomain`: Set the OAuth domain, default is `fanfou.com`
 - `hooks`: Hooks allow modifications with OAuth
 
-> For more Fanfou API docs, see the [Fanfou API doc](https://github.com/FanfouAPI/FanFouAPIDoc/wiki).
+> For more Fanfou API docs, see the
+> [Fanfou API doc](https://github.com/FanfouAPI/FanFouAPIDoc/wiki).
 
 ## API
 
@@ -66,7 +67,7 @@ ff.getAccessToken(token);
 ff.xauth();
 ff.get(uri, params);
 ff.post(uri, params);
-ff.upload(uri, params)
+ff.upload(uri, params);
 ```
 
 **Examples**
@@ -80,13 +81,16 @@ ff.upload(uri, params)
   const token = await ff.getAccessToken(token);
 
   // Get timeline
-  const timeline = await ff.get('/statuses/home_timeline', {});
+  const timeline = await ff.get("/statuses/home_timeline", {});
 
   // Post status
-  const status = await ff.post('/statuses/update', {status: 'post test'});
+  const status = await ff.post("/statuses/update", { status: "post test" });
 
   // Upload photo
-  const result = await ff.upload('/photos/upload', {photo: uploadFile, status: 'unicorn'});
+  const result = await ff.upload("/photos/upload", {
+    photo: uploadFile,
+    status: "unicorn",
+  });
 })();
 ```
 
@@ -96,26 +100,30 @@ Use `hooks` for your reverse-proxy server
 
 ```javascript
 const ff = new Fanfou({
-  consumerKey: '',
-  consumerSecret: '',
-  oauthToken: '',
-  oauthTokenSecret: '',
-  apiDomain: 'api.example.com',
-  oauthDomain: 'example.com',
+  consumerKey: "",
+  consumerSecret: "",
+  oauthToken: "",
+  oauthTokenSecret: "",
+  apiDomain: "api.example.com",
+  oauthDomain: "example.com",
   hooks: {
-    baseString: str => {
-      return str.replace('example.com', 'fanfou.com');
-    }
-  }
+    baseString: (str) => {
+      return str.replace("example.com", "fanfou.com");
+    },
+  },
 });
 ```
 
 ## Related
 
-- [fanfou-sdk-node](https://github.com/fanfoujs/fanfou-sdk-node) - Fanfou SDK for Node.js
-- [fanfou-sdk-browser](https://github.com/fanfoujs/fanfou-sdk-browser) - Fanfou SDK for browser
-- [fanfou-sdk-weapp](https://github.com/fanfoujs/fanfou-sdk-weapp) - Fanfou SDK for WeApp
-- [fanfou-sdk-python](https://github.com/LitoMore/fanfou-sdk-python) - Fanfou SDK for Python
+- [fanfou-sdk-node](https://github.com/fanfoujs/fanfou-sdk-node) - Fanfou SDK
+  for Node.js
+- [fanfou-sdk-browser](https://github.com/fanfoujs/fanfou-sdk-browser) - Fanfou
+  SDK for browser
+- [fanfou-sdk-weapp](https://github.com/fanfoujs/fanfou-sdk-weapp) - Fanfou SDK
+  for WeApp
+- [fanfou-sdk-python](https://github.com/LitoMore/fanfou-sdk-python) - Fanfou
+  SDK for Python
 
 ## License
 
